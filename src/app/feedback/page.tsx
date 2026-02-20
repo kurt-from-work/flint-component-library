@@ -237,7 +237,7 @@ export default function FeedbackPage() {
       </ShowcaseSection>
 
       <ShowcaseSection title="Tooltip & Hover Card" description="Contextual information on hover.">
-        <div className="flex gap-6 items-center">
+        <div className="flex flex-wrap gap-6 items-center">
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger asChild>

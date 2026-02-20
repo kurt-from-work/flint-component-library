@@ -104,8 +104,8 @@ export default function DataDisplayPage() {
         <div className="flex items-center space-x-4">
           <Skeleton className="h-12 w-12 rounded-full" />
           <div className="space-y-2">
-            <Skeleton className="h-4 w-[250px]" />
-            <Skeleton className="h-4 w-[200px]" />
+            <Skeleton className="h-4 w-[min(250px,60vw)]" />
+            <Skeleton className="h-4 w-[min(200px,50vw)]" />
           </div>
         </div>
         <div className="mt-4 space-y-3">

@@ -69,7 +69,7 @@ export default function ButtonsPage() {
       </ShowcaseSection>
 
       <ShowcaseSection title="Toggle" description="A two-state button that can be on or off.">
-        <div className="flex gap-3">
+        <div className="flex flex-wrap gap-3">
           <Toggle aria-label="Toggle bold">
             <Bold className="h-4 w-4" />
           </Toggle>

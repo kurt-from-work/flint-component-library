@@ -17,6 +17,8 @@ import {
   Palette,
   Sun,
   Moon,
+  Menu,
+  X,
 } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
@@ -36,7 +38,11 @@ const navItems = [
   { label: "Surfaces & Layers", href: "/surfaces", icon: Layers },
 ];
 
-export function AppSidebar() {
+function SidebarContent({
+  onNavClick,
+}: {
+  onNavClick?: () => void;
+}) {
   const pathname = usePathname();
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
@@ -48,7 +54,7 @@ export function AppSidebar() {
   const isDark = theme === "dark";
 
   return (
-    <aside className="w-60 min-w-60 border-r border-sidebar-border bg-sidebar h-screen sticky top-0 flex flex-col">
+    <>
       <div className="p-4 pb-2">
         <div className="flex items-center gap-2">
           <Image src="/flint-logo-no-container.png" alt="Flint logo" width={18} height={18} className="w-[18px] h-[18px]" />
@@ -66,6 +72,7 @@ export function AppSidebar() {
             <Link
               key={item.href}
               href={item.href}
+              onClick={onNavClick}
               className={`flex items-center gap-2.5 rounded-md px-3 py-2 text-sm transition-colors ${
                 active
                   ? "bg-sidebar-accent text-sidebar-accent-foreground font-semibold"
@@ -101,6 +108,81 @@ export function AppSidebar() {
           </div>
         )}
       </div>
+    </>
+  );
+}
+
+export function MobileHeader({ onMenuClick }: { onMenuClick: () => void }) {
+  return (
+    <header className="md:hidden sticky top-0 z-40 flex items-center gap-3 border-b border-sidebar-border bg-sidebar px-4 py-3">
+      <button
+        onClick={onMenuClick}
+        className="text-sidebar-foreground"
+        aria-label="Open navigation menu"
+      >
+        <Menu size={22} />
+      </button>
+      <Image src="/flint-logo-no-container.png" alt="Flint logo" width={16} height={16} className="w-4 h-4" />
+      <span className="text-sm font-bold text-sidebar-foreground tracking-tight" style={{ fontFamily: "var(--font-display)" }}>
+        Flint
+      </span>
+    </header>
+  );
+}
+
+export function MobileDrawer({
+  open,
+  onClose,
+}: {
+  open: boolean;
+  onClose: () => void;
+}) {
+  // Prevent body scroll when drawer is open
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
+  return (
+    <>
+      {/* Backdrop */}
+      <div
+        className={`fixed inset-0 z-50 bg-black/50 transition-opacity md:hidden ${
+          open ? "opacity-100" : "opacity-0 pointer-events-none"
+        }`}
+        onClick={onClose}
+      />
+      {/* Drawer */}
+      <aside
+        className={`fixed inset-y-0 left-0 z-50 w-64 bg-sidebar border-r border-sidebar-border flex flex-col transition-transform duration-300 md:hidden ${
+          open ? "translate-x-0" : "-translate-x-full"
+        }`}
+      >
+        <div className="flex items-center justify-end p-2">
+          <button
+            onClick={onClose}
+            className="text-sidebar-foreground/70 hover:text-sidebar-foreground p-1"
+            aria-label="Close navigation menu"
+          >
+            <X size={20} />
+          </button>
+        </div>
+        <SidebarContent onNavClick={onClose} />
+      </aside>
+    </>
+  );
+}
+
+export function AppSidebar() {
+  return (
+    <aside className="hidden md:flex w-60 min-w-60 border-r border-sidebar-border bg-sidebar h-screen sticky top-0 flex-col">
+      <SidebarContent />
     </aside>
   );
 }

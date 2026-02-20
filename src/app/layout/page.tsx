@@ -125,7 +125,7 @@ export default function LayoutPage() {
             <NavigationMenuItem>
               <NavigationMenuTrigger>Activities</NavigationMenuTrigger>
               <NavigationMenuContent>
-                <div className="grid gap-3 p-4 w-[400px]">
+                <div className="grid gap-3 p-4 w-[min(400px,80vw)]">
                   <NavigationMenuLink className="block select-none space-y-1 rounded-md p-3 hover:bg-accent">
                     <div className="text-sm font-medium">My Activities</div>
                     <p className="text-xs text-muted-foreground">
@@ -144,7 +144,7 @@ export default function LayoutPage() {
             <NavigationMenuItem>
               <NavigationMenuTrigger>Settings</NavigationMenuTrigger>
               <NavigationMenuContent>
-                <div className="grid gap-3 p-4 w-[300px]">
+                <div className="grid gap-3 p-4 w-[min(300px,80vw)]">
                   <NavigationMenuLink className="block select-none space-y-1 rounded-md p-3 hover:bg-accent">
                     <div className="text-sm font-medium">General</div>
                     <p className="text-xs text-muted-foreground">
