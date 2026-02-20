@@ -15,7 +15,7 @@ export const flintTokens = {
       darkCream: "#EADECD",
       paleCream: "#FFF8EC",
       brown: "#5C3330",
-      deepBrown: "#2E1515",
+      deepBrown: "#24100F",
     },
     ui: {
       orange: {

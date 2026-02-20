@@ -20,7 +20,7 @@ const uiCream = [
 const uiBrown = [
   { name: "Brown", var: "brand-brown", hex: "#5C3330" },
   { name: "Dark Hover", var: "brand-dark-hover", hex: "#370D0E" },
-  { name: "Deep Brown", var: "brand-deep-brown", hex: "#2E1515" },
+  { name: "Deep Brown", var: "brand-deep-brown", hex: "#24100F" },
   { name: "Dark Accent", var: "dark-accent", hex: "#1E0A0A" },
 ];
 
