@@ -61,7 +61,16 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
-import { Terminal, AlertCircle, Info, CheckCircle2 } from "lucide-react";
+import { Spinner } from "@/components/ui/spinner";
+import {
+  Empty,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+  EmptyDescription,
+  EmptyContent,
+} from "@/components/ui/empty";
+import { Terminal, AlertCircle, Info, CheckCircle2, Inbox, FileSearch } from "lucide-react";
 
 export default function FeedbackPage() {
   return (
@@ -288,6 +297,60 @@ export default function FeedbackPage() {
             <p className="text-sm text-muted-foreground mb-2">100%</p>
             <Progress value={100} />
           </div>
+        </div>
+      </ShowcaseSection>
+
+      <ShowcaseSection title="Spinner" description="A loading spinner indicator.">
+        <div className="flex flex-wrap items-center gap-6">
+          <div className="flex items-center gap-2">
+            <Spinner className="size-4" />
+            <span className="text-sm text-muted-foreground">Small (16px)</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <Spinner className="size-5" />
+            <span className="text-sm text-muted-foreground">Medium (20px)</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <Spinner className="size-6" />
+            <span className="text-sm text-muted-foreground">Large (24px)</span>
+          </div>
+          <Button disabled>
+            <Spinner />
+            Saving...
+          </Button>
+        </div>
+      </ShowcaseSection>
+
+      <ShowcaseSection title="Empty" description="Placeholder for empty states with icon, title, description, and actions.">
+        <div className="grid gap-6 max-w-lg">
+          <Empty className="border">
+            <EmptyHeader>
+              <EmptyMedia variant="icon">
+                <Inbox />
+              </EmptyMedia>
+              <EmptyTitle>No activities yet</EmptyTitle>
+              <EmptyDescription>
+                Create your first AI-powered learning activity to get started.
+              </EmptyDescription>
+            </EmptyHeader>
+            <EmptyContent>
+              <Button>Create Activity</Button>
+            </EmptyContent>
+          </Empty>
+          <Empty className="border">
+            <EmptyHeader>
+              <EmptyMedia variant="icon">
+                <FileSearch />
+              </EmptyMedia>
+              <EmptyTitle>No results found</EmptyTitle>
+              <EmptyDescription>
+                Try adjusting your search or filters to find what you&apos;re looking for.
+              </EmptyDescription>
+            </EmptyHeader>
+            <EmptyContent>
+              <Button variant="outline">Clear filters</Button>
+            </EmptyContent>
+          </Empty>
         </div>
       </ShowcaseSection>
     </ShowcaseLayout>

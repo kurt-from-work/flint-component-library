@@ -6,40 +6,49 @@ import { ShowcaseSection } from "@/client/components/showcase-section";
 const brandColors = [
   { name: "Brand Orange", var: "brand-orange", hex: "#F05023" },
   { name: "Brand Cream", var: "brand-cream", hex: "#FAF0E1" },
+  { name: "Brand White", var: "brand-white", hex: "#FFFFFF" },
   { name: "Brand Dark", var: "brand-dark", hex: "#160D0E" },
-  { name: "Dark Hover", var: "brand-dark-hover", hex: "#370D0E" },
-  { name: "Dark Accent", var: "dark-accent", hex: "#1E0A0A" },
-  { name: "Dark Cream", var: "dark-cream", hex: "#EADECD" },
+];
+
+const uiCream = [
   { name: "Pale Cream", var: "brand-pale-cream", hex: "#FFF8EC" },
+  { name: "Cream", var: "brand-cream", hex: "#FAF0E1" },
+  { name: "Warm Cream", var: "warm-cream", hex: "#F2E5D3" },
+  { name: "Dark Cream", var: "dark-cream", hex: "#EADECD" },
+];
+
+const uiBrown = [
   { name: "Brown", var: "brand-brown", hex: "#5C3330" },
+  { name: "Dark Hover", var: "brand-dark-hover", hex: "#370D0E" },
   { name: "Deep Brown", var: "brand-deep-brown", hex: "#2E1515" },
+  { name: "Dark Accent", var: "dark-accent", hex: "#1E0A0A" },
 ];
 
 const uiOrange = [
   { name: "Orange 100", var: "ui-orange-100", hex: "#FED7AA" },
-  { name: "Orange 500", var: "ui-orange", hex: "#D8441A" },
   { name: "Orange Hover", var: "ui-orange-hover", hex: "#F05023" },
+  { name: "Orange 500", var: "ui-orange", hex: "#D8441A" },
   { name: "Orange 900", var: "ui-orange-900", hex: "#7C2D12" },
 ];
 
 const uiRed = [
   { name: "Red 100", var: "ui-red-100", hex: "#FECDD3" },
-  { name: "Red 500", var: "ui-red", hex: "#BE123C" },
   { name: "Red Hover", var: "ui-red-hover", hex: "#E11D48" },
+  { name: "Red 500", var: "ui-red", hex: "#BE123C" },
   { name: "Red 900", var: "ui-red-900", hex: "#881337" },
 ];
 
 const uiBlue = [
   { name: "Blue 100", var: "ui-blue-100", hex: "#BAE6FD" },
-  { name: "Blue 500", var: "ui-blue", hex: "#0369A1" },
   { name: "Blue Hover", var: "ui-blue-hover", hex: "#0EA5E9" },
+  { name: "Blue 500", var: "ui-blue", hex: "#0369A1" },
   { name: "Blue 900", var: "ui-blue-900", hex: "#0C4A6E" },
 ];
 
 const uiGreen = [
   { name: "Green 100", var: "ui-green-100", hex: "#D1FAE5" },
-  { name: "Green 500", var: "ui-green", hex: "#047857" },
   { name: "Green Hover", var: "ui-green-hover", hex: "#10B981" },
+  { name: "Green 500", var: "ui-green", hex: "#047857" },
   { name: "Green 900", var: "ui-green-900", hex: "#064E3B" },
 ];
 
@@ -131,7 +140,7 @@ export default function ThemePage() {
       </p>
 
       <ShowcaseSection title="Brand Core" description="Immutable brand marks — the foundation of the Flint identity.">
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
           {brandColors.map((c) => (
             <ColorSwatch key={c.var} name={c.name} cssVar={c.var} hex={c.hex} />
           ))}
@@ -159,6 +168,8 @@ export default function ThemePage() {
 
       <ShowcaseSection title="UI Color Scales" description="Muted functional colors for daily UI use. Each has 100/500/hover/900 stops.">
         <div className="space-y-6">
+          <ColorScaleRow colors={uiCream} label="Cream (Neutrals Light)" />
+          <ColorScaleRow colors={uiBrown} label="Brown (Neutrals Dark)" />
           <ColorScaleRow colors={uiOrange} label="Orange (Primary)" />
           <ColorScaleRow colors={uiRed} label="Red (Destructive)" />
           <ColorScaleRow colors={uiBlue} label="Blue (Accent)" />

@@ -12,6 +12,7 @@ import {
   CommandSeparator,
 } from "@/components/ui/command";
 import { Badge } from "@/components/ui/badge";
+import { Kbd, KbdGroup } from "@/components/ui/kbd";
 import {
   Calculator,
   Calendar,
@@ -111,6 +112,42 @@ export default function TypographyPage() {
             <Badge variant="secondary">Category</Badge>
             <Badge variant="outline">Tag</Badge>
             <Badge variant="destructive">Alert</Badge>
+          </div>
+        </div>
+      </ShowcaseSection>
+
+      <ShowcaseSection title="Keyboard Shortcut (Kbd)" description="Styled keyboard key indicators for shortcuts and hotkeys.">
+        <div className="space-y-4">
+          <div className="flex flex-wrap items-center gap-4">
+            <div className="flex items-center gap-1.5">
+              <span className="text-sm text-muted-foreground">Save:</span>
+              <KbdGroup>
+                <Kbd>⌘</Kbd>
+                <Kbd>S</Kbd>
+              </KbdGroup>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <span className="text-sm text-muted-foreground">Copy:</span>
+              <KbdGroup>
+                <Kbd>⌘</Kbd>
+                <Kbd>C</Kbd>
+              </KbdGroup>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <span className="text-sm text-muted-foreground">Search:</span>
+              <KbdGroup>
+                <Kbd>⌘</Kbd>
+                <Kbd>K</Kbd>
+              </KbdGroup>
+            </div>
+          </div>
+          <div className="flex flex-wrap items-center gap-4">
+            <Kbd>Enter</Kbd>
+            <Kbd>Shift</Kbd>
+            <Kbd>Tab</Kbd>
+            <Kbd>Esc</Kbd>
+            <Kbd>↑</Kbd>
+            <Kbd>↓</Kbd>
           </div>
         </div>
       </ShowcaseSection>

@@ -22,8 +22,18 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
+import {
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+  ChartLegend,
+  ChartLegendContent,
+  type ChartConfig,
+} from "@/components/ui/chart";
+import { Bar, BarChart, XAxis, YAxis, CartesianGrid } from "recharts";
 
 const students = [
   { name: "Alice Johnson", email: "alice@school.edu", sessions: 12, status: "Active" },
@@ -34,6 +44,26 @@ const students = [
 ];
 
 const tags = Array.from({ length: 30 }).map((_, i) => `Activity ${i + 1}`);
+
+const chartData = [
+  { month: "Jan", sessions: 186, activities: 12 },
+  { month: "Feb", sessions: 305, activities: 18 },
+  { month: "Mar", sessions: 237, activities: 15 },
+  { month: "Apr", sessions: 173, activities: 10 },
+  { month: "May", sessions: 409, activities: 24 },
+  { month: "Jun", sessions: 214, activities: 14 },
+];
+
+const chartConfig = {
+  sessions: {
+    label: "Sessions",
+    color: "var(--color-primary)",
+  },
+  activities: {
+    label: "Activities",
+    color: "var(--color-secondary)",
+  },
+} satisfies ChartConfig;
 
 export default function DataDisplayPage() {
   return (
@@ -151,6 +181,70 @@ export default function DataDisplayPage() {
             <CarouselNext />
           </Carousel>
         </div>
+      </ShowcaseSection>
+
+      <ShowcaseSection title="Aspect Ratio" description="Maintains consistent width-to-height ratio for responsive media.">
+        <div className="grid gap-4 sm:grid-cols-2 max-w-2xl">
+          <div>
+            <p className="text-sm text-muted-foreground mb-2">16:9</p>
+            <AspectRatio ratio={16 / 9} className="rounded-md border bg-muted overflow-hidden">
+              <div className="flex items-center justify-center h-full text-muted-foreground text-sm">
+                16:9 — Video
+              </div>
+            </AspectRatio>
+          </div>
+          <div>
+            <p className="text-sm text-muted-foreground mb-2">4:3</p>
+            <AspectRatio ratio={4 / 3} className="rounded-md border bg-muted overflow-hidden">
+              <div className="flex items-center justify-center h-full text-muted-foreground text-sm">
+                4:3 — Photo
+              </div>
+            </AspectRatio>
+          </div>
+          <div>
+            <p className="text-sm text-muted-foreground mb-2">1:1</p>
+            <AspectRatio ratio={1} className="rounded-md border bg-muted overflow-hidden">
+              <div className="flex items-center justify-center h-full text-muted-foreground text-sm">
+                1:1 — Square
+              </div>
+            </AspectRatio>
+          </div>
+          <div>
+            <p className="text-sm text-muted-foreground mb-2">21:9</p>
+            <AspectRatio ratio={21 / 9} className="rounded-md border bg-muted overflow-hidden">
+              <div className="flex items-center justify-center h-full text-muted-foreground text-sm">
+                21:9 — Ultrawide
+              </div>
+            </AspectRatio>
+          </div>
+        </div>
+      </ShowcaseSection>
+
+      <ShowcaseSection title="Chart" description="Data visualization using Recharts with theme-aware styling.">
+        <Card className="max-w-lg">
+          <CardHeader>
+            <CardTitle>Student Engagement</CardTitle>
+            <CardDescription>Sessions and activities over the last 6 months.</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <ChartContainer config={chartConfig} className="h-[250px] w-full">
+              <BarChart data={chartData} accessibilityLayer>
+                <CartesianGrid vertical={false} />
+                <XAxis
+                  dataKey="month"
+                  tickLine={false}
+                  tickMargin={10}
+                  axisLine={false}
+                />
+                <YAxis tickLine={false} axisLine={false} tickMargin={8} />
+                <ChartTooltip content={<ChartTooltipContent />} />
+                <ChartLegend content={<ChartLegendContent />} />
+                <Bar dataKey="sessions" fill="var(--color-sessions)" radius={4} />
+                <Bar dataKey="activities" fill="var(--color-activities)" radius={4} />
+              </BarChart>
+            </ChartContainer>
+          </CardContent>
+        </Card>
       </ShowcaseSection>
     </ShowcaseLayout>
   );

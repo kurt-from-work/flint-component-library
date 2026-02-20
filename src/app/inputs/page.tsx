@@ -10,6 +10,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Switch } from "@/components/ui/switch";
 import { Slider } from "@/components/ui/slider";
+import { Button } from "@/components/ui/button";
 import {
   Select,
   SelectContent,
@@ -17,6 +18,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { NativeSelect, NativeSelectOption } from "@/components/ui/native-select";
 import { Calendar } from "@/components/ui/calendar";
 import {
   InputOTP,
@@ -24,10 +26,49 @@ import {
   InputOTPSlot,
   InputOTPSeparator,
 } from "@/components/ui/input-otp";
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupInput,
+  InputGroupText,
+} from "@/components/ui/input-group";
+import {
+  Field,
+  FieldLabel,
+  FieldDescription,
+  FieldError,
+} from "@/components/ui/field";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "@/components/ui/command";
+import { CalendarIcon, Check, ChevronsUpDown, DollarSign, Mail, Search } from "lucide-react";
+import { cn } from "@/lib/utils";
+
+const subjects = [
+  { value: "math", label: "Mathematics" },
+  { value: "science", label: "Science" },
+  { value: "english", label: "English" },
+  { value: "history", label: "History" },
+  { value: "art", label: "Art" },
+];
 
 export default function InputsPage() {
   const [date, setDate] = useState<Date | undefined>(new Date());
   const [sliderValue, setSliderValue] = useState([50]);
+  const [comboOpen, setComboOpen] = useState(false);
+  const [comboValue, setComboValue] = useState("");
+  const [pickerOpen, setPickerOpen] = useState(false);
+  const [pickerDate, setPickerDate] = useState<Date | undefined>();
 
   return (
     <ShowcaseLayout>
@@ -55,6 +96,53 @@ export default function InputsPage() {
         </div>
       </ShowcaseSection>
 
+      <ShowcaseSection title="Input Group" description="Group inputs with addons like icons, text, or buttons.">
+        <div className="grid gap-4 max-w-sm">
+          <div className="space-y-2">
+            <Label>With icon</Label>
+            <InputGroup>
+              <InputGroupAddon>
+                <InputGroupText><Search className="h-4 w-4" /></InputGroupText>
+              </InputGroupAddon>
+              <InputGroupInput placeholder="Search..." />
+            </InputGroup>
+          </div>
+          <div className="space-y-2">
+            <Label>With prefix text</Label>
+            <InputGroup>
+              <InputGroupAddon>
+                <InputGroupText><DollarSign className="h-4 w-4" /></InputGroupText>
+              </InputGroupAddon>
+              <InputGroupInput placeholder="0.00" type="number" />
+            </InputGroup>
+          </div>
+          <div className="space-y-2">
+            <Label>With suffix text</Label>
+            <InputGroup>
+              <InputGroupInput placeholder="username" />
+              <InputGroupAddon align="inline-end">
+                <InputGroupText>@flint.com</InputGroupText>
+              </InputGroupAddon>
+            </InputGroup>
+          </div>
+        </div>
+      </ShowcaseSection>
+
+      <ShowcaseSection title="Field" description="Structured form field with label, description, and error states.">
+        <div className="grid gap-6 max-w-sm">
+          <Field>
+            <FieldLabel>Display name</FieldLabel>
+            <Input placeholder="Enter your name" />
+            <FieldDescription>This is your public display name.</FieldDescription>
+          </Field>
+          <Field data-invalid="true">
+            <FieldLabel>Email</FieldLabel>
+            <Input placeholder="name@example.com" aria-invalid="true" />
+            <FieldError>Please enter a valid email address.</FieldError>
+          </Field>
+        </div>
+      </ShowcaseSection>
+
       <ShowcaseSection title="Textarea" description="Multi-line text input.">
         <div className="max-w-sm space-y-2">
           <Label htmlFor="message">Message</Label>
@@ -77,6 +165,92 @@ export default function InputsPage() {
               <SelectItem value="art">Art</SelectItem>
             </SelectContent>
           </Select>
+        </div>
+      </ShowcaseSection>
+
+      <ShowcaseSection title="Native Select" description="A styled native HTML select element.">
+        <div className="max-w-sm space-y-2">
+          <Label>Grade Level</Label>
+          <NativeSelect>
+            <NativeSelectOption value="" disabled>Select a grade</NativeSelectOption>
+            <NativeSelectOption value="k">Kindergarten</NativeSelectOption>
+            <NativeSelectOption value="1">1st Grade</NativeSelectOption>
+            <NativeSelectOption value="2">2nd Grade</NativeSelectOption>
+            <NativeSelectOption value="3">3rd Grade</NativeSelectOption>
+            <NativeSelectOption value="4">4th Grade</NativeSelectOption>
+            <NativeSelectOption value="5">5th Grade</NativeSelectOption>
+          </NativeSelect>
+        </div>
+      </ShowcaseSection>
+
+      <ShowcaseSection title="Combobox" description="Searchable select with autocomplete — built from Popover + Command.">
+        <div className="max-w-sm space-y-2">
+          <Label>Subject</Label>
+          <Popover open={comboOpen} onOpenChange={setComboOpen}>
+            <PopoverTrigger asChild>
+              <Button
+                variant="outline"
+                role="combobox"
+                aria-expanded={comboOpen}
+                className="w-full justify-between"
+              >
+                {comboValue
+                  ? subjects.find((s) => s.value === comboValue)?.label
+                  : "Select subject..."}
+                <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-[min(300px,80vw)] p-0">
+              <Command>
+                <CommandInput placeholder="Search subjects..." />
+                <CommandList>
+                  <CommandEmpty>No subject found.</CommandEmpty>
+                  <CommandGroup>
+                    {subjects.map((s) => (
+                      <CommandItem
+                        key={s.value}
+                        value={s.value}
+                        onSelect={(val) => {
+                          setComboValue(val === comboValue ? "" : val);
+                          setComboOpen(false);
+                        }}
+                      >
+                        <Check className={cn("mr-2 h-4 w-4", comboValue === s.value ? "opacity-100" : "opacity-0")} />
+                        {s.label}
+                      </CommandItem>
+                    ))}
+                  </CommandGroup>
+                </CommandList>
+              </Command>
+            </PopoverContent>
+          </Popover>
+        </div>
+      </ShowcaseSection>
+
+      <ShowcaseSection title="Date Picker" description="A date selection control — built from Popover + Calendar.">
+        <div className="max-w-sm space-y-2">
+          <Label>Date of birth</Label>
+          <Popover open={pickerOpen} onOpenChange={setPickerOpen}>
+            <PopoverTrigger asChild>
+              <Button
+                variant="outline"
+                className={cn("w-full justify-start text-left font-normal", !pickerDate && "text-muted-foreground")}
+              >
+                <CalendarIcon className="mr-2 h-4 w-4" />
+                {pickerDate ? pickerDate.toLocaleDateString() : "Pick a date"}
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-auto p-0">
+              <Calendar
+                mode="single"
+                selected={pickerDate}
+                onSelect={(d) => {
+                  setPickerDate(d);
+                  setPickerOpen(false);
+                }}
+              />
+            </PopoverContent>
+          </Popover>
         </div>
       </ShowcaseSection>
 
