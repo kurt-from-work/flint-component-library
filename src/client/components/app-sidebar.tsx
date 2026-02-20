@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
@@ -24,6 +23,8 @@ import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { useEffect, useState } from "react";
+
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
 const navItems = [
   { label: "Overview", href: "/", icon: LayoutDashboard },
@@ -57,7 +58,8 @@ function SidebarContent({
     <>
       <div className="p-4 pb-2">
         <div className="flex items-center gap-2">
-          <Image src="/flint-logo-no-container.png" alt="Flint logo" width={18} height={18} className="w-[18px] h-[18px]" />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={`${basePath}/flint-logo-no-container.png`} alt="Flint logo" width={18} height={18} className="w-[18px] h-[18px]" />
           <h1 className="text-[18px] font-bold text-sidebar-foreground tracking-tight leading-none" style={{ fontFamily: "var(--font-display)" }}>
             Flint
           </h1>
@@ -122,7 +124,8 @@ export function MobileHeader({ onMenuClick }: { onMenuClick: () => void }) {
       >
         <Menu size={22} />
       </button>
-      <Image src="/flint-logo-no-container.png" alt="Flint logo" width={16} height={16} className="w-4 h-4" />
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={`${basePath}/flint-logo-no-container.png`} alt="Flint logo" width={16} height={16} className="w-4 h-4" />
       <span className="text-sm font-bold text-sidebar-foreground tracking-tight" style={{ fontFamily: "var(--font-display)" }}>
         Flint
       </span>
