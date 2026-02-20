@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ShowcaseLayout } from "@/client/components/showcase-layout";
 import { Badge } from "@/components/ui/badge";
 
@@ -31,7 +32,7 @@ export default function Home() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {componentGroups.map((group) => (
-          <a
+          <Link
             key={group.href}
             href={group.href}
             className="group rounded-lg border border-border bg-card p-5 hover:border-primary hover:shadow-md dark:hover:border-primary/40 transition-all"
@@ -45,7 +46,7 @@ export default function Home() {
             <p className="text-sm text-muted-foreground group-hover:text-brand-dark-hover dark:group-hover:text-learning-peach transition-colors">
               View {group.count} component{group.count !== 1 ? "s" : ""}
             </p>
-          </a>
+          </Link>
         ))}
       </div>
 
