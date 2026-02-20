@@ -24,7 +24,7 @@ import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { useEffect, useState } from "react";
 
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
 const navItems = [
   { label: "Overview", href: "/", icon: LayoutDashboard },
