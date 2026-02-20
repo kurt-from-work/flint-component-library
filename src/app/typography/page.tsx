@@ -28,39 +28,74 @@ export default function TypographyPage() {
         Typography &amp; Misc
       </h1>
       <p className="text-muted-foreground mb-8">
-        Type scale, command palette, and miscellaneous components.
+        Flint type scale, fonts, command palette, and formatting components.
       </p>
 
-      <ShowcaseSection title="Type Scale" description="Heading and body text sizes using Geist font.">
+      <ShowcaseSection title="Display Font" description="GT Super — used for headings and hero text.">
         <div className="space-y-4">
-          <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
-            Heading 1
+          <h1 className="scroll-m-20 text-4xl font-medium tracking-tight lg:text-5xl" style={{ fontFamily: "var(--font-display)" }}>
+            Bold &amp; Energetic
           </h1>
-          <h2 className="scroll-m-20 text-3xl font-semibold tracking-tight">
-            Heading 2
+          <h2 className="scroll-m-20 text-3xl font-medium tracking-tight" style={{ fontFamily: "var(--font-display)" }}>
+            Warm &amp; Inviting
           </h2>
-          <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
-            Heading 3
-          </h3>
-          <h4 className="scroll-m-20 text-xl font-semibold tracking-tight">
-            Heading 4
-          </h4>
-          <p className="leading-7">
-            This is body text. The quick brown fox jumps over the lazy dog. Flint
-            helps K-12 teachers create engaging AI-powered learning activities
-            for their students.
-          </p>
           <p className="text-sm text-muted-foreground">
-            This is small/muted text used for descriptions and secondary content.
+            Font family: &apos;GT Super&apos;, Georgia, serif
           </p>
-          <p className="text-xs text-muted-foreground">
-            This is extra-small text for captions and metadata.
-          </p>
-          <blockquote className="mt-4 border-l-2 pl-6 italic">
+        </div>
+      </ShowcaseSection>
+
+      <ShowcaseSection title="Body Type Scale" description="Inter — used for all body text and UI elements.">
+        <div className="space-y-4">
+          <div>
+            <p className="text-xs text-muted-foreground mb-1">h1 — 2.25rem / 500</p>
+            <h1 className="text-4xl font-medium tracking-tight">
+              Heading 1
+            </h1>
+          </div>
+          <div>
+            <p className="text-xs text-muted-foreground mb-1">h2 — 1.875rem / 500</p>
+            <h2 className="text-3xl font-medium tracking-tight">
+              Heading 2
+            </h2>
+          </div>
+          <div>
+            <p className="text-xs text-muted-foreground mb-1">h3 — 1.5rem / 500</p>
+            <h3 className="text-2xl font-medium tracking-tight">
+              Heading 3
+            </h3>
+          </div>
+          <div>
+            <p className="text-xs text-muted-foreground mb-1">h4 — 1.25rem / 500</p>
+            <h4 className="text-xl font-medium tracking-tight">
+              Heading 4
+            </h4>
+          </div>
+          <div>
+            <p className="text-xs text-muted-foreground mb-1">base — 1rem / 400</p>
+            <p className="leading-7">
+              This is body text. The quick brown fox jumps over the lazy dog. Flint
+              helps K-12 teachers create engaging AI-powered learning activities
+              for their students.
+            </p>
+          </div>
+          <div>
+            <p className="text-xs text-muted-foreground mb-1">sm — 0.875rem</p>
+            <p className="text-sm text-muted-foreground">
+              This is small/muted text used for descriptions and secondary content.
+            </p>
+          </div>
+          <div>
+            <p className="text-xs text-muted-foreground mb-1">xs — 0.75rem</p>
+            <p className="text-xs text-muted-foreground">
+              This is extra-small text for captions and metadata.
+            </p>
+          </div>
+          <blockquote className="mt-4 border-l-2 border-primary pl-6 italic">
             &ldquo;The best way to predict the future is to create it.&rdquo;
           </blockquote>
           <p className="font-mono text-sm">
-            This is monospace text — useful for code or technical content.
+            Geist Mono — monospace for code and technical content.
           </p>
         </div>
       </ShowcaseSection>

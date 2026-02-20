@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
@@ -24,6 +25,7 @@ import { useEffect, useState } from "react";
 
 const navItems = [
   { label: "Overview", href: "/", icon: LayoutDashboard },
+  { label: "Colors", href: "/theme", icon: Palette },
   { label: "Buttons & Toggle", href: "/buttons", icon: MousePointerClick },
   { label: "Inputs & Forms", href: "/inputs", icon: FormInput },
   { label: "Cards & Containers", href: "/cards", icon: PanelTop },
@@ -32,7 +34,6 @@ const navItems = [
   { label: "Data Display", href: "/data-display", icon: Table2 },
   { label: "Typography & Misc", href: "/typography", icon: Type },
   { label: "Surfaces & Layers", href: "/surfaces", icon: Layers },
-  { label: "Theme", href: "/theme", icon: Palette },
 ];
 
 export function AppSidebar() {
@@ -47,10 +48,15 @@ export function AppSidebar() {
   const isDark = theme === "dark";
 
   return (
-    <aside className="w-60 min-w-60 border-r border-border bg-sidebar h-screen sticky top-0 flex flex-col">
+    <aside className="w-60 min-w-60 border-r border-sidebar-border bg-sidebar h-screen sticky top-0 flex flex-col">
       <div className="p-4 pb-2">
-        <h1 className="text-sm font-bold text-sidebar-foreground">Flint</h1>
-        <p className="text-[10px] text-muted-foreground">Component Library</p>
+        <div className="flex items-center gap-2">
+          <Image src="/flint-logo-no-container.png" alt="Flint logo" width={18} height={18} className="w-[18px] h-[18px]" />
+          <h1 className="text-[18px] font-bold text-sidebar-foreground tracking-tight leading-none" style={{ fontFamily: "var(--font-display)" }}>
+            Flint
+          </h1>
+        </div>
+        <p className="text-[10px] text-sidebar-foreground/60 ml-[26px]">Component Library</p>
       </div>
       <nav className="flex-1 overflow-y-auto px-2 pb-4">
         {navItems.map((item) => {
@@ -62,8 +68,8 @@ export function AppSidebar() {
               href={item.href}
               className={`flex items-center gap-2.5 rounded-md px-3 py-2 text-sm transition-colors ${
                 active
-                  ? "bg-accent text-accent-foreground font-semibold"
-                  : "text-muted-foreground hover:bg-accent/50 hover:text-foreground"
+                  ? "bg-sidebar-accent text-sidebar-accent-foreground font-semibold"
+                  : "text-sidebar-foreground/70 hover:bg-sidebar-accent/50 hover:text-sidebar-foreground"
               }`}
             >
               <Icon size={16} />
@@ -72,13 +78,13 @@ export function AppSidebar() {
           );
         })}
       </nav>
-      <Separator />
+      <Separator className="bg-sidebar-border" />
       <div className="p-3">
         {mounted && (
           <div className="flex items-center justify-between">
             <Label
               htmlFor="dark-mode"
-              className="flex items-center gap-2 text-xs text-muted-foreground cursor-pointer"
+              className="flex items-center gap-2 text-xs text-sidebar-foreground/70 cursor-pointer"
             >
               {isDark ? <Moon size={14} /> : <Sun size={14} />}
               {isDark ? "Dark" : "Light"} mode
@@ -90,6 +96,7 @@ export function AppSidebar() {
                 setTheme(checked ? "dark" : "light")
               }
               aria-label="Toggle dark mode"
+              className="data-[state=unchecked]:bg-brand-brown"
             />
           </div>
         )}
